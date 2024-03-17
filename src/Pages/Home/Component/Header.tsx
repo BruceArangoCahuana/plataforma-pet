@@ -24,7 +24,6 @@ export default function Header(){
                             }
                      
                         </div>
-                        <a href="" className="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a>
                     </div>
                 </nav>
             </div>

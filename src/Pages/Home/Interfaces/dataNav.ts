@@ -7,17 +7,17 @@ interface data{
 export const dataNav : data[] = [
     {
         id:1,
-        name:'Abierto desde',
-        description:'8.00AM - 9.00PM',
+        name:'Vsitanos',
+        description:'Previa coordinacion',
     },
     {
         id:2,
         name:'Correo',
-        description:'info@example.com',
+        description:'refugiocolitasyamor@gmail.com',
     },
     {
         id:3,
         name:'Telefono',
-        description:'+012 345 6789',
+        description:'+51 981557865',
     }
 ]
