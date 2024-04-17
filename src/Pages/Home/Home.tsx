@@ -8,14 +8,45 @@ import Plan from "./Component/Plan";
 import MiniNav from "./Component/MiniNav";
 import Perdidos from "./Component/Perdidos";
 import { url } from "inspector";
-import React from "react";
+import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Footer from "./Component/Footer";
+import urlBase from "../../config/index"
+import axios from "axios";
+
 
 export default function Home() {
+  const[plan,setPlan] = React.useState<any[]>([])
+  const[perdidosRecientes,setPerdidosRecientes] = React.useState<any[]>([])
+
   React.useEffect(() => {
     AOS.init({ });
   }, []);
+  const getPlan = async() =>{
+      const url =  urlBase.pathBase+"/plan-mensual/list"
+      axios.get(url)
+      .then((response) => {
+        const{data} = response.data
+        setPlan(data)
+      })
+      .catch(e => console.log(e.message))
+  }
+
+  const getPerdidoRecientes = () =>{
+    const url =  urlBase.pathBase+"/perdidos/recientes"
+    axios.get(url)
+      .then((response) => {
+        const{data} = response.data
+        setPerdidosRecientes(data)
+      })
+      .catch(e => console.log(e.message))
+  }
+  useEffect(() =>{
+    getPlan()
+    getPerdidoRecientes()
+   
+  },[])
   return (
     <Fragment>
       <MiniNav />
@@ -135,7 +166,9 @@ export default function Home() {
             </h1>
           </div>
           <div className="row">
-            <Plan />
+            <Plan
+              plan={plan}
+            />
           </div>
         </div>
       </div>
@@ -148,7 +181,7 @@ export default function Home() {
           </h1>
         </div>
         <div className="row">
-          <Perdidos />
+          <Perdidos  perdidosRecientes={perdidosRecientes} />
         </div>
       </div>
       <div className="container-fluid bg-light pt-5 pb-4">
@@ -212,6 +245,7 @@ export default function Home() {
             </div>
         </div>
     </div>
+    <Footer />
     </Fragment>
   );
 }
